@@ -28,3 +28,26 @@ def number():
     print("Now i will prove to you that I can count to any number you want.")
     for i in range(int(input()) + 1):
         print(str(i) + "!")
+
+
+# 5 этап
+def test():
+    print("Let's test your programming knowledge.")
+    print("Why do we use methods?")
+    print("1. To repeat a statement multiple times.")
+    print("2. To decompose a program into several small subroutines.")
+    print("3. To determine the execution time of a program.")
+    print("4. To interrupt the execution of a program.")
+    g = int(input())
+    while g != 2:
+        print("Please, try again")
+        g = int(input())
+    if g == 2:
+        print("Congratulations, have a nice day!")
+
+
+hello()
+name()
+your_age()
+number()
+test()
