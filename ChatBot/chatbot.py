@@ -4,4 +4,7 @@ def hello():
     print("I was created in 2021.")
 
 
-hello()
+# 2 этап
+def name():
+    a = input("Please, remind me your name. ")
+    print("What a great name you have,", a)
