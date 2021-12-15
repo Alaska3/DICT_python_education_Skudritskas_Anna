@@ -21,3 +21,10 @@ def your_age():
 
     age = ((remainder3 * 70 + remainder5 * 21 + remainder7 * 15) % 105)
     print("Your age is", age, ";", "that's good time to start programming!")
+
+
+# 4 этап
+def number():
+    print("Now i will prove to you that I can count to any number you want.")
+    for i in range(int(input()) + 1):
+        print(str(i) + "!")
