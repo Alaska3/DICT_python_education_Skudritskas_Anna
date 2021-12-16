@@ -15,9 +15,8 @@ def guess():
     input("Press Enter to start the game: ")
     print("Guess the word: ")
     ans_robot = random.choice(word_list)
-    print(ans_robot[0] + ans_robot[1] + ans_robot[2])  # 4 этап
+    print(ans_robot[0] + ans_robot[1] + ans_robot[2] + '-' * (len(ans_robot)-3))  # 4 этап
     ans = input()
-
     if ans == ans_robot:
         print("You survived!")
     else:
