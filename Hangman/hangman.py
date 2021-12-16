@@ -19,22 +19,29 @@ def guess():
     splitted_word = list(random.choice(word_list))
     guessed = ["-" for i in splitted_word]
 
-    while True:
+    while constant > 0:
         print(' '.join(guessed))
         print("Attempts: ", constant)
         answer = input("Enter a latter: ").strip()
-        if answer in splitted_word:
+        if answer in guessed:
+            constant -= 1
+            print("No improvements")
+        elif answer in splitted_word:
             for i, c in enumerate(splitted_word):
                 if c == answer:
                     guessed[i] = answer
-        if answer == splitted_word:
-            print("You survived!")
-            break
+            if "-" not in guessed:
+                print("You win")
+                break
         else:
+            print("That letter doesn't appear word")
             constant -= 1
-        if constant == 0: 
-            print("You lost!")
-            break
+
+        if constant == 0:
+            print("You lost")
+
+
+
 
 
 many()
