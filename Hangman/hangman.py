@@ -16,22 +16,34 @@ def guess():
     print("Guess the word: ")
 # 5 этап
     constant = 8
-    splitted_word = list(random.choice(word_list))
+    word = random.choice(word_list)
+    splitted_word = list(word)
     guessed = ["-" for i in splitted_word]
-
+    english_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'l', 'g', 'k', 'j', 'i', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     while constant > 0:
         print(' '.join(guessed))
         print("Attempts: ", constant)
         answer = input("Enter a latter: ").strip()
+        if answer not in english_letters:
+            print("Please, enter a lowercase English letter")
+            constant = constant
+            continue
+        elif len(answer) >= 2:
+            print("You should input a single letter")
+            constant = constant
+            continue
         if answer in guessed:
             constant -= 1
-            print("No improvements")
+            print("You've already guessed this letter")
+
         elif answer in splitted_word:
             for i, c in enumerate(splitted_word):
                 if c == answer:
                     guessed[i] = answer
             if "-" not in guessed:
-                print("You win")
+                print(word)
+                print("You guessed the word!")
+                print("You survived!")
                 break
         else:
             print("That letter doesn't appear word")
