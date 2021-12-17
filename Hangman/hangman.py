@@ -2,7 +2,7 @@ import random
 
 
 # 1 этап
-def menu():  #
+def menu(): 
     print("HANGMAN")
     print("The game will be soon")
 
@@ -47,8 +47,9 @@ def guess():
                 print("You survived!")
                 break
 
-            if constant == 0:
+            if constant == 1:
                 print("You lost, try again")
+                break
         else:
             print("That letter doesn't appear word")
             constant -= 1
