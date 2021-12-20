@@ -1,118 +1,103 @@
-print("Starting to make a coffee.")
-print("Grinding coffee beans.")
-print("Boiling water.")
-print("Mixing boiled water with crushed coffee beans.")
-print("Pouring coffee into the cup.")
-print("Pouring some milk into the cup.")
-print("Coffee ready!")
+class CoffeeMachine:
+    def __init__(self):
+        self.water = 400
+        self.coffee_beans = 120
+        self.milk = 540
+        self.money = 550
+        self.cups = 9
 
-# 5 stage
-money = 550
-water = 400
-milk = 540
-coffee_beans = 120
-cups = 9
+    def print_state(self):
+        print("The coffee machine has:")
+        print(self.water, "of water")
+        print(self.milk, "of milk")
+        print(self.coffee_beans, "of coffee beans")
+        print(self.cups, "of disposable cups")
+        print(f"$ {self.money} of money")
 
+    def select_action(self):
+        while True:
+            print("ATTENTION!!! Here you must write words no numbers!")
+            user_input = input('Write action:\n 1-buy\n 2-fill\n 3-take\n 4-remaining\n 5-exit\n: ')
+            if user_input == "buy":
+                CoffeeMachine.buy(self)
+            elif user_input == "fill":
+                CoffeeMachine.fill(self)
+            elif user_input == "take":
+                CoffeeMachine.take(self)
+            elif user_input == "remaining":
+                CoffeeMachine.print_state(self)
+            elif user_input == "exit":
+                break
+            else:
+                print("invalid choice")
 
-def remaining():
-    print("The coffee machine has: ")
-    print(str(water), "of water")
-    print(str(coffee_beans), "of coffee beans")
-    print(str(cups), "of disposable caps")
-    print(str(money), "of money")
+    def choose_coffee(self):
+        print()
+        move = input('What do you want to buy?'
+                     ' 1 - espresso,'
+                     ' 2 - latte,'
+                     ' 3 - cappuccino,'
+                     ' 4 - back to main menu: ')
+        if move == '4':
+            return 0
+        return int(move)
 
-
-def number():
-    if water < 0:
-        print("Not enough water.")
-        return False
-    elif milk < 0:
-        print("Not enough milk.")
-        return False
-    elif coffee_beans < 0:
-        print("Not enough coffee beans.")
-        return False
-    elif cups < 0:
-        print("Not enough caps.")
-        return False
-    elif money < 0:
-        print("Not enough money.")
-        return False
-    else:
+    def numbers(self, needed_water, needed_milk, needed_coffee):
+        if self.water < needed_water:
+            print('Sorry, not enough water!')
+            return False
+        if self.milk < needed_milk:
+            print('Sorry, not enough milk!')
+            return False
+        if self.coffee_beans < needed_coffee:
+            print('Sorry, not enough coffee_beans!')
+            return False
+        if self.cups < 1:
+            print('Sorry, not enough cups!\n')
+            return False
+        print('I have enough resources, making you a coffee!\n')
         return True
 
+    def buy(self):
+        user_input = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:")
 
-def buy():
-    global water, coffee_beans, milk, cups, money
-    print("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:")
-    user_input = input()
-    if int(user_input) == 1:
-        if number():
-            water -= 250
-            coffee_beans -= 16
-            cups -= 1
-            money += 4
-            print("I have enough resources making you a espresso.")
-    elif int(user_input) == 2:
-        if number():
-            water -= 350
-            milk -= 75
-            coffee_beans -= 20
-            cups -= 1
-            money += 7
-            print("I have enough resources making you a latte.")
-    elif int(user_input) == 3:
-        if number():
-            water -= 350
-            milk -= 75
-            coffee_beans -= 20
-            cups -= 1
-            money += 6
-            print("I have enough resources making you a cappuccino.")
+        if user_input == '1':
+            if CoffeeMachine.numbers(self, 250, 0, 16):
+                self.water -= 250
+                self.coffee_beans -= 16
+                self.money += 4
+                self.cups -= 1
+        elif user_input == '2':
+            if CoffeeMachine.numbers(self, 350, 75, 20):
+                self.water -= 350
+                self.milk -= 75
+                self.coffee_beans -= 20
+                self.money += 7
+                self.cups -= 1
+        elif user_input == '3':
+            if CoffeeMachine.numbers(self, 200, 100, 12):
+                self.water -= 200
+                self.milk -= 100
+                self.coffee_beans -= 12
+                self.money += 6
+                self.cups -= 1
+        elif user_input == "back":
+            return
+        else:
+            print('invalid choice')
+            return CoffeeMachine.buy(self)
 
+    def fill(self):
+        self.water += int(input('Write how many ml of water do you want to add: '))
+        self.milk += int(input('Write how many ml of milk do you want to add: '))
+        self.coffee_beans += int(input('Write how many grams of coffee coffee_beans do you want to add: '))
+        self.cups += int(input('Write how many disposable cups of coffee do you want to add: '))
 
-def fill():
-    global water, milk, coffee_beans, cups
-    print("How many ml of water to add to the coffee machine?")
-    water_add = int(input())
-    water += water_add
-    print("How many ml of milk to add to the coffee machine?")
-    milk_add = int(input())
-    milk += milk_add
-    print("How many cup to add to the coffee machine?")
-    cups_add = int(input())
-    cups = cups_add
-    print("How many grams of coffee beans to add to the coffee machine?")
-    beans_add = int(input())
-    coffee_beans += beans_add
+    def take(self):
+        print(f'I gave you {self.money}')
+        self.money = 0
 
 
-def take():
-    global money
-    print("I gave you", str(money), "\n")
-    money = 0
-
-
-def option():
-    while True:
-        remaining()
-        print("Please, choose options: 'buy', 'fill', 'take', 'remaining'")
-        user_input = input()
-        if user_input == 'buy':
-            buy()
-        elif user_input == 'fill':
-            fill()
-        elif user_input == 'take':
-            take()
-        elif user_input == 'remaining':
-            remaining()
-
-        print("What ou want to do next: 'back', 'exit'")
-        user_next_input = input()
-        if user_next_input == 'back':
-            continue
-        elif user_next_input == 'exit':
-            break
-
-
-option()
+if __name__ == "__main__":
+    coffee = CoffeeMachine()
+    coffee.select_action()
