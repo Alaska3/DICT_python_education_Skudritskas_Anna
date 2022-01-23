@@ -9,3 +9,10 @@ if number > 0:
         print(a)
 else:
     print("No one is joining for the party.")
+
+print("Enter the total amount: ")
+bill = int(input())
+bill1 = bill / number
+for name in a:
+    a[name] = bill1
+print(a)
