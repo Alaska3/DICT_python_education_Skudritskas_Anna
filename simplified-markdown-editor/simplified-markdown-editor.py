@@ -67,15 +67,33 @@ def link():
 
 
 def inline_code():
-    pass
+    global text_1
+    b = input('Enter your text: > ')
+    text_1 += '\n' + '~' + b + '~' + '\n'
 
 
 def ordered_list():
-    pass
+    global text_1
+    row = int(input("Number of rows:> "))
+    if row > 0:
+        for i in range(1, row + 1):
+            a = str(input("Row #" + str(i) + ": >"))
+            text_1 = (str(i) + "." + a)
+    else:
+        print("The number of rows should be greater than zero.")
+        ordered_list()
 
 
 def unordered_list():
-    pass
+    global text_1
+    row = int(input("Number of rows:> "))
+    if row > 0:
+        for i in range(1, row + 1):
+            a = str(input("Row #" + str(i) + ": >"))
+            text_1 = ('*' + a + '\n')
+    else:
+        print("The number of rows should be greater than zero.")
+        unordered_list()
 
 
 def new_line():
@@ -88,8 +106,6 @@ def helping():
     ordered-list, unordered-list, new-line")
     print("Special commands: help!, done!")
     func()
-
-
 
 
 func()
