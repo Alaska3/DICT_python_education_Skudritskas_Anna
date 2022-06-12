@@ -2,8 +2,103 @@ text = 0
 text_1 = ""
 
 
+def plain():
+    global text_1
+    text_1 += input("Text:> ")
+    func()
+
+
+def bold():
+    global text, text_1
+    text = input("Text:> ")
+    text_1 = "**" + text + "**"
+    func()
+
+
+def italic():
+    global text, text_1
+    text = input("Text:> ")
+    text_1 = "*" + text + "*"
+    func()
+
+
+def header():
+    global text, text_1
+    level = int(input('Level: > '))
+    if level not in range(1, 7):
+        print('The level should be within the range of 1 to 6. Try again')
+        header()
+    else:
+        text = input('Text: > ')
+        text_1 = '#' * level + ' ' + text + '\n'
+        func()
+
+
+def link():
+    global text_1
+    label = input('Label: > ')
+    url = input('URL: > ')
+    text_1 += '\n' + '[' + label + ']' + '(' + url + ')' + '\n'
+    func()
+
+
+def inline_code():
+    global text_1
+    b = input('Enter your text: > ')
+    text_1 += '\n' + '~' + b + '~' + '\n'
+    func()
+
+
+def ordered_list():
+    global text_1
+    row = int(input("Number of rows:> "))
+    if row > 0:
+        for i in range(1, row + 1):
+            a = str(input("Row #" + str(i) + ": >"))
+            text_1 = (str(i) + "." + a)
+    else:
+        print("The number of rows should be greater than zero.")
+        ordered_list()
+    func()
+
+
+def unordered_list():
+    global text_1
+    row = int(input("Number of rows:> "))
+    if row > 0:
+        for i in range(1, row + 1):
+            a = str(input("Row #" + str(i) + ": >"))
+            text_1 = ('*' + a + '\n')
+    else:
+        print("The number of rows should be greater than zero.")
+        unordered_list()
+    func()
+
+
+def new_line():
+    global text_1
+    text_1 += "\n"
+    func()
+
+
+def helping():
+    print("Available formatters: plain, bold, italic, header, link, inline-code, \
+ordered-list, unordered-list, new-line")
+    print("Special commands: help!, done!")
+    func()
+
+
+def done():
+    file = open('output.md', 'w')
+    file.write(text_1)
+    file.close()
+
+
 def func():
-    us_input = ''
+    print("Available formatters: plain, bold, italic, header, link, inline-code, \
+ordered-list, unordered-list, new-line")
+    print("Special commands: help!, done!")
+    us_input = input("Chose a formatter: ")
     if us_input == "plain":
         plain()
     elif us_input == "bold":
@@ -25,87 +120,10 @@ def func():
     elif us_input == "help!":
         helping()
     elif us_input == "done!":
-        pass
+        done()
     else:
         print("Unknown formatting type or command.")
-        us_input = input("Chose a formatter: ")
-
-
-def plain():
-    global text_1
-    text_1 += input("Text:> ")
-
-
-def bold():
-    global text, text_1
-    text = input("Text:> ")
-    text_1 = "**" + text + "**"
-
-
-def italic():
-    global text, text_1
-    text = input("Text:> ")
-    text_1 = "*" + text + "*"
-
-
-def header():
-    global text, text_1
-    level = int(input('Level: > '))
-    if level not in range(1, 7):
-        print('The level should be within the range of 1 to 6. Try again')
-        header()
-    else:
-        text = input('Text: > ')
-        text_1 = '#' * level + ' ' + text + '\n'
-
-
-def link():
-    global text_1
-    label = input('Label: > ')
-    url = input('URL: > ')
-    text_1 += '\n' + '[' + label + ']' + '(' + url + ')' + '\n'
-
-
-def inline_code():
-    global text_1
-    b = input('Enter your text: > ')
-    text_1 += '\n' + '~' + b + '~' + '\n'
-
-
-def ordered_list():
-    global text_1
-    row = int(input("Number of rows:> "))
-    if row > 0:
-        for i in range(1, row + 1):
-            a = str(input("Row #" + str(i) + ": >"))
-            text_1 = (str(i) + "." + a)
-    else:
-        print("The number of rows should be greater than zero.")
-        ordered_list()
-
-
-def unordered_list():
-    global text_1
-    row = int(input("Number of rows:> "))
-    if row > 0:
-        for i in range(1, row + 1):
-            a = str(input("Row #" + str(i) + ": >"))
-            text_1 = ('*' + a + '\n')
-    else:
-        print("The number of rows should be greater than zero.")
-        unordered_list()
-
-
-def new_line():
-    global text_1
-    text_1 += "\n"
-
-
-def helping():
-    print("Available formatters: plain, bold, italic, header, link, inline-code, \
-    ordered-list, unordered-list, new-line")
-    print("Special commands: help!, done!")
-    func()
+        func()
 
 
 func()
